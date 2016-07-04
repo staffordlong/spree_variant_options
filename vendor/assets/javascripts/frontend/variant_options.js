@@ -30,7 +30,7 @@ SpreeVariantOption.OptionValuesHandler.prototype.optionsButtonClickHandler = fun
     var $this = $(this);
     e.preventDefault();
     if(!$this.hasClass('locked')) {
-      $this.addClass('selected');
+      $this.addClass('selected').parents('.variant-option-values__value').addClass('variant-option-values__value--selected');
       _this.updateSiblings($this);
       _this.resetAllNextLevel($this);
       _this.unlockNextLevel($this);
@@ -61,7 +61,7 @@ SpreeVariantOption.OptionValuesHandler.prototype.disableCartInputFields = functi
 };
 
 SpreeVariantOption.OptionValuesHandler.prototype.updateSiblings = function(optionValue) {
-  var siblings = optionValue.closest('li').siblings();
+  var siblings = optionValue.closest('li').siblings().removeClass('variant-option-values__value--selected');
   siblings.find('a').removeClass('selected');
   siblings.filter('.clear-option').removeClass('hidden');
 };
