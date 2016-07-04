@@ -6,7 +6,7 @@
 
     <% ordered_option_types.each_with_index do |type, index| %>
       <div id="<%= dom_id(type) %>" class="variant-options index-<%= index %>">
-        <h6 class="variant-option-type">Available <%= type.presentation.pluralize %></h6>
+        <h6 class="variant-option-type">Available <%= type.presentation.pluralize %><%= (option_type_heading_suffixes ||= {})[type.name.parameterize.to_sym] %></h6>
         <% if (selector_types ||= {})[type.name.parameterize.to_sym] == 'dropdown' %>
           <select class="dropdown">
             <% type.option_values.sort_by(&:position).each do |value| %>
