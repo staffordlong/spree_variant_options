@@ -20,6 +20,9 @@
           </li>
           <li class="clear"></li>
         </ul>
+        <% if (post_selector_content ||= {}).try(type.presentation.parameterize.to_sym) %>
+          <%= post_selector_content[type.presentation.parameterize.to_sym] %>
+        <% end %>
       </div>
     <% end %>
     <%= hidden_field_tag "variant_id", "", id: "variant_id", class: "hidden" %>
