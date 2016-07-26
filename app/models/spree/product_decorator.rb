@@ -19,12 +19,13 @@ Spree::Product.class_eval do
   end
 
   private
-    def get_initial_detail(variant)
-      {
-        in_stock: variant.can_supply?,
-        variant_id: variant.id,
-        variant_price: variant.price_in(Spree::Config[:currency]).money,
-        option_types: {},
-      }
-    end
+  
+  def get_initial_detail(variant)
+    {
+      in_stock: variant.can_supply?,
+      variant_id: variant.id,
+      variant_price: variant.price_in(Spree::Config[:currency]).money,
+      option_types: {},
+    }
+  end
 end
