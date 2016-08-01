@@ -4,6 +4,7 @@
     <% option_value_ids = @product.variants.joins(:option_values).pluck("spree_option_values.id").uniq %>
     <% ordered_option_types = @product.ordered_option_types.includes(:option_values) %>
 
+<<<<<<< Updated upstream
     <% ordered_option_types.each_with_index do |type, index| %>
       <div id="<%= dom_id(type) %>" class="variant-options index-<%= index %>"> 
         <h6 class="variant-option-type">Available <%= type.presentation.pluralize %><%= (option_type_heading_suffixes ||= {})[type.name.parameterize.to_sym] %></h6>
@@ -13,6 +14,27 @@
               <% if option_value_ids.include? value.id %>
                 <%= content_tag(:option, value.presentation, { class: "option-value", data: { type_id: type.id, value_id: value.id, level: (index + 1) } }) %>
               <% end %>
+=======
+        <% ordered_option_types.each_with_index do |type, index| %>
+      <div id="<%= dom_id(type) %>" class="variant-options index-<%= index %>">
+        <h6 class="variant-option-type"><strong><%= type.presentation %></strong></h6>
+        <ul class="variant-option-values">
+          <% type.option_values.sort_by(&:position).each do |value| %>
+            <% if option_value_ids.include? value.id %>
+              <% if value.presentation == '8'
+                @default_variant_id = value.id
+              end %>
+
+              <li>
+              <%= link_to value.has_image? ? image_tag(value.image.url, alt: value.presentation) : content_tag(:span, value.presentation), "#", title: value.presentation, class: "option-value #{' selected' if @default_variant_id.present?}", 
+              data: { 
+              	type_id: type.id, 
+              	value_id: value.id, 
+              	level: (index + 1) 
+              	} %>
+              	
+              </li>
+>>>>>>> Stashed changes
             <% end %>
           </select>
         <% else %>
@@ -31,7 +53,7 @@
         <% end %>
       </div>
     <% end %>
-    <%= hidden_field_tag "variant_id", "", id: "variant_id", class: "hidden" %>
+    <%= hidden_field_tag "variant_id", (@default_variant_id.present ? @default_variant_id : '') , id: "variant_id", class: "hidden" %>
     <script type="text/javascript">
     //<![CDATA[
       var variant_option_details = <%== @product.variants_option_value_details.to_json %>
