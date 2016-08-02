@@ -13,9 +13,12 @@ SpreeVariantOption.OptionValuesHandler = function(selectors) {
 
 SpreeVariantOption.OptionValuesHandler.prototype.init = function() {
   this.bindEvents();
-  this.optionsButton.filter('[data-level!=1]').addClass('locked').removeClass('selected');
-  this.disableCartInputFields(true);
-  this.triggerEventsOnSelectedOptions();
+  // Only reset form if prefill not complete
+  this.setVariantWithSelectedValues();
+  if ( !this.variantId ) {
+    this.optionsButton.filter('[data-level!=1]').addClass('locked').removeClass('selected');
+    this.disableCartInputFields(true);
+  }
 };
 
 SpreeVariantOption.OptionValuesHandler.prototype.bindEvents = function() {
@@ -59,13 +62,6 @@ SpreeVariantOption.OptionValuesHandler.prototype.disableCartInputFields = functi
   this.quantityField.prop('disabled', value);
 
   if(value) { this.priceHeading.html('Select Variant'); }
-};
-
-SpreeVariantOption.OptionValuesHandler.prototype.triggerEventsOnSelectedOptions = function() {
-  this.optionsButton.filter('.selected').each(function() {
-    var $this = $(this);
-    $this.trigger('click');
-  });
 };
 
 SpreeVariantOption.OptionValuesHandler.prototype.updateSiblings = function(optionValue) {
