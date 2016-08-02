@@ -36,7 +36,7 @@ SpreeVariantOption.OptionValuesHandler.prototype.optionsButtonClickHandler = fun
       _this.unlockNextLevel($this);
 
       if($this.data('level') == options["option_type_count"]) {
-        _this.setVariantWithSelecetedValues();
+        _this.setVariantWithSelectedValues();
       }
     }
   });
@@ -138,7 +138,7 @@ SpreeVariantOption.OptionValuesHandler.prototype.unlockNextLevel = function(opti
   }
 };
 
-SpreeVariantOption.OptionValuesHandler.prototype.setVariantWithSelecetedValues = function() {
+SpreeVariantOption.OptionValuesHandler.prototype.setVariantWithSelectedValues = function() {
   var conditions = {},
       _this = this;
   this.variantId = 0;
