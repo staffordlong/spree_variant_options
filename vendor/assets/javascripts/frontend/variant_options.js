@@ -39,9 +39,9 @@ SpreeVariantOption.OptionValuesHandler.prototype.optionsButtonClickHandler = fun
       _this.resetAllNextLevel($this);
       _this.unlockNextLevel($this);
 
-      if($this.data('level') == options["option_type_count"]) {
+      // if($this.data('level') == options["option_type_count"]) {
         _this.setVariantWithSelectedValues();
-      }
+      // }
     }
   });
 };
