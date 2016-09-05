@@ -102,10 +102,10 @@ SpreeVariantOption.OptionValuesHandler.prototype.anyVariantExists = function(con
 
 SpreeVariantOption.OptionValuesHandler.prototype.setVariantId = function(is_exist) {
   if(is_exist) {
-    this.variantField.val(this.variantId);
+    this.variantField.val(this.variantId).trigger('change');
     this.priceHeading.html(this.variantPrice);
   } else {
-    this.variantField.val('');
+    this.variantField.val('').trigger('change');
     this.priceHeading.html('Select Variant');
   }
 };
